@@ -15,7 +15,7 @@ function JobPost({ jobPost }) {
             bulk of the card's content. */}
           </Card.Text>
 
-          <Link to={`/${jobPost.company_name}`}>
+          <Link to={`/company/${jobPost.company_name}`}>
             See all jobs from {jobPost.company_name}{" "}
           </Link>
         </Card.Body>

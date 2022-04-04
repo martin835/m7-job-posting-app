@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import JobPost from "./components/JobPost";
 import JobSearch from "./components/JobSearch";
 import CompanyJobs from "./components/CompanyJobs";
+import CategoryJobs from "./components/CategoryJobs";
 
 function App() {
   const [data, setData] = useState([]);
@@ -59,7 +60,8 @@ function App() {
             />
           }
         />
-        <Route path="/:company_name" element={<CompanyJobs />} />
+        <Route path="/company/:company_name" element={<CompanyJobs />} />
+        <Route path="/category/:category" element={<CategoryJobs />} />
       </Routes>
     </BrowserRouter>
   );
