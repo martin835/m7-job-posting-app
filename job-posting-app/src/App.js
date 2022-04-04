@@ -14,6 +14,8 @@ import {
 } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import JobPost from "./components/JobPost";
+import JobSearch from "./components/JobSearch";
+import CompanyJobs from "./components/CompanyJobs";
 
 function App() {
   const [data, setData] = useState([]);
@@ -37,52 +39,29 @@ function App() {
     }
   };
   return (
-    <>
-      <Navbar bg="primary" variant="dark">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-        </Nav>
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
-        </Form> */}
-      </Navbar>
-      {/*       <Jumbotron fluid>
+    <BrowserRouter>
+      <Jumbotron fluid>
         <Container>
           <h1>Job Hunt</h1>
           <p>Search for jobs</p>
         </Container>
-      </Jumbotron> */}
+      </Jumbotron>
 
-      <Container className="mt-5">
-        <Row>
-          <Col md={12}>
-            <Form.Control
-              size="lg"
-              className="w-50"
-              type="text"
-              placeholder="Large text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyUp={(e) => fetchSearchData(e)}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <JobSearch
+              data={data}
+              setSearchQuery={setSearchQuery}
+              fetchSearchData={fetchSearchData}
+              searchQuery={searchQuery}
             />
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          <Col md={12}>
-            {data.map((jobPost) => (
-              <JobPost jobPost={jobPost} />
-            ))}
-          </Col>
-        </Row>
-      </Container>
-    </>
+          }
+        />
+        <Route path="/:company_name" element={<CompanyJobs />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

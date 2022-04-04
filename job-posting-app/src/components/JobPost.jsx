@@ -1,4 +1,5 @@
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function JobPost({ jobPost }) {
   return (
@@ -13,10 +14,10 @@ function JobPost({ jobPost }) {
             {/*  Some quick example text to build on the card title and make up the
             bulk of the card's content. */}
           </Card.Text>
-          <Card.Link href={jobPost.url}>More information</Card.Link>
-          <Card.Link href="#">
+
+          <Link to={`/${jobPost.company_name}`}>
             See all jobs from {jobPost.company_name}{" "}
-          </Card.Link>
+          </Link>
         </Card.Body>
       </Card>
     </>
