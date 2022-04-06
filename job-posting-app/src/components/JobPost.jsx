@@ -1,8 +1,8 @@
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { RiHeartAddLine } from "react-icons/ri";
+import { RiHeartAddLine, RiHeartAddFill } from "react-icons/ri";
 import { connect } from "react-redux";
-import { addToFavorites } from "../redux/actions";
+import { addToFavorites, removeFromFavorites } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
   favorites: state.favorites,
@@ -12,9 +12,19 @@ const mapDispatchToProps = (dispatch) => ({
   addToFavorites: (jobPost) => {
     dispatch(addToFavorites(jobPost));
   },
+
+  removeFromFavorites: (i) => {
+    dispatch(removeFromFavorites(i));
+  },
 });
 
-function JobPost({ jobPost, addToFavorites }) {
+function JobPost({
+  jobPost,
+  i,
+  addToFavorites,
+  favorites,
+  removeFromFavorites,
+}) {
   return (
     <>
       <Card className="mt-3">
@@ -31,13 +41,23 @@ function JobPost({ jobPost, addToFavorites }) {
             See all jobs from {jobPost.company_name}{" "}
           </Link>
 
-          <Button
-            variant="link"
-            className="ml-3"
-            onClick={() => addToFavorites(jobPost)}
-          >
-            <RiHeartAddLine />
-          </Button>
+          {favorites.includes(jobPost) ? (
+            <Button
+              variant="link"
+              className="ml-3"
+              onClick={() => removeFromFavorites(i)}
+            >
+              <RiHeartAddFill />
+            </Button>
+          ) : (
+            <Button
+              variant="link"
+              className="ml-3"
+              onClick={() => addToFavorites(jobPost)}
+            >
+              <RiHeartAddLine />
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </>

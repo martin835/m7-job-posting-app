@@ -58,7 +58,7 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
             <Container>
               <Row>
                 <Col md={12}>
-                  {data.map((jobPost) => (
+                  {data.map((jobPost, i) => (
                     <JobPost jobPost={jobPost} key={jobPost._id} />
                   ))}
                 </Col>
