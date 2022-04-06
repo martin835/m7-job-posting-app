@@ -35,7 +35,7 @@ function CompanyJobs() {
           <h4>All jobs at: </h4>
           <h2>{params.company_name}</h2>
           {data.map((jobPost) => (
-            <JobPost jobPost={jobPost} />
+            <JobPost jobPost={jobPost} key={jobPost._id} />
           ))}
         </Col>
       </Row>
