@@ -21,7 +21,7 @@ import FavoritesJobs from "./components/FavoritesJobs";
 
 function App() {
   const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const fetchSearchData = async (e) => {
     if (e.key === "Enter") {
       try {
@@ -45,7 +45,10 @@ function App() {
       <Jumbotron fluid>
         <Container>
           <h1>Job Hunt</h1>
-          <p>Search for jobs</p>
+          <Link to="/">
+            <p>Home</p>
+          </Link>
+
           <Link to="/favorites">
             <p>See favorites</p>
           </Link>

@@ -34,8 +34,8 @@ function CategoryJobs() {
         <Col md={12}>
           <h4>All jobs in: </h4>
           <h2>{params.category} category</h2>
-          {data.map((jobPost, i) => (
-            <JobPost jobPost={jobPost} i={i} key={jobPost._id} />
+          {data.map((jobPost) => (
+            <JobPost jobPost={jobPost} key={jobPost._id} />
           ))}
         </Col>
       </Row>

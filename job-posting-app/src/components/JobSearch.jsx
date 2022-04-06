@@ -32,8 +32,8 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
         <Row>
           <Col md={3} className="order-2">
             <ListGroup>
-              {categoryData.map((category) => (
-                <ListGroup.Item>
+              {categoryData.map((category, i) => (
+                <ListGroup.Item key={i}>
                   <Link to={`/category/${category}`}>{category}</Link>
                 </ListGroup.Item>
               ))}
@@ -58,7 +58,7 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
             <Container>
               <Row>
                 <Col md={12}>
-                  {data.map((jobPost, i) => (
+                  {data.map((jobPost) => (
                     <JobPost jobPost={jobPost} key={jobPost._id} />
                   ))}
                 </Col>
