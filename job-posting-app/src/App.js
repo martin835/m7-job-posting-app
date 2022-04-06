@@ -17,6 +17,7 @@ import JobPost from "./components/JobPost";
 import JobSearch from "./components/JobSearch";
 import CompanyJobs from "./components/CompanyJobs";
 import CategoryJobs from "./components/CategoryJobs";
+import FavoritesJobs from "./components/FavoritesJobs";
 
 function App() {
   const [data, setData] = useState([]);
@@ -45,6 +46,9 @@ function App() {
         <Container>
           <h1>Job Hunt</h1>
           <p>Search for jobs</p>
+          <Link to="/favorites">
+            <p>See favorites</p>
+          </Link>
         </Container>
       </Jumbotron>
 
@@ -62,6 +66,7 @@ function App() {
         />
         <Route path="/company/:company_name" element={<CompanyJobs />} />
         <Route path="/category/:category" element={<CategoryJobs />} />
+        <Route path="/favorites" element={<FavoritesJobs />} />
       </Routes>
     </BrowserRouter>
   );

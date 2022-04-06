@@ -1,7 +1,20 @@
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { RiHeartAddLine } from "react-icons/ri";
+import { connect } from "react-redux";
+import { addToFavorites } from "../redux/actions";
 
-function JobPost({ jobPost }) {
+const mapStateToProps = (state) => ({
+  favorites: state.favorites,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorites: (jobPost) => {
+    dispatch(addToFavorites(jobPost));
+  },
+});
+
+function JobPost({ jobPost, addToFavorites }) {
   return (
     <>
       <Card className="mt-3">
@@ -14,14 +27,21 @@ function JobPost({ jobPost }) {
             {/*  Some quick example text to build on the card title and make up the
             bulk of the card's content. */}
           </Card.Text>
-
           <Link to={`/company/${jobPost.company_name}`}>
             See all jobs from {jobPost.company_name}{" "}
           </Link>
+
+          <Button
+            variant="link"
+            className="ml-3"
+            onClick={() => addToFavorites(jobPost)}
+          >
+            <RiHeartAddLine />
+          </Button>
         </Card.Body>
       </Card>
     </>
   );
 }
 
-export default JobPost;
+export default connect(mapStateToProps, mapDispatchToProps)(JobPost);

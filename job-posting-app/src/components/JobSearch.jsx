@@ -30,7 +30,7 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
     <>
       <Container>
         <Row>
-          <Col md={3}>
+          <Col md={3} className="order-2">
             <ListGroup>
               {categoryData.map((category) => (
                 <ListGroup.Item>
@@ -39,8 +39,8 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
               ))}
             </ListGroup>
           </Col>
-          <Col md={9}>
-            <Container>
+          <Col md={9} className="order-1">
+            <Container className="mb-4">
               <Row>
                 <Col md={12}>
                   <Form.Control
