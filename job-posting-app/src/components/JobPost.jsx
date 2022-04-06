@@ -13,14 +13,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addToFavorites(jobPost));
   },
 
-  removeFromFavorites: (i) => {
-    dispatch(removeFromFavorites(i));
+  removeFromFavorites: (id) => {
+    dispatch(removeFromFavorites(id));
   },
 });
 
 function JobPost({
   jobPost,
-  i,
+
   addToFavorites,
   favorites,
   removeFromFavorites,
@@ -45,7 +45,7 @@ function JobPost({
             <Button
               variant="link"
               className="ml-3"
-              onClick={() => removeFromFavorites(i)}
+              onClick={() => removeFromFavorites(jobPost._id)}
             >
               <RiHeartAddFill />
             </Button>
