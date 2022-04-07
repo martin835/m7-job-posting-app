@@ -20,26 +20,28 @@ import CategoryJobs from "./components/CategoryJobs";
 import FavoritesJobs from "./components/FavoritesJobs";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const fetchSearchData = async (e) => {
-    if (e.key === "Enter") {
-      try {
-        let response = await fetch(
-          `https://strive-jobs-api.herokuapp.com/jobs?search=${searchQuery}&limit=10`
-        );
-        if (response.ok) {
-          let data = await response.json();
-          console.log(data);
-          setData(data.data);
-        } else {
-          alert("something wrong with the data");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  // const [data, setData] = useState([]);
+  //const [searchQuery, setSearchQuery] = useState("");
+
+  // const fetchSearchData = async (e) => {
+  //   if (e.key === "Enter") {
+  //     try {
+  //       let response = await fetch(
+  //         `https://strive-jobs-api.herokuapp.com/jobs?search=${searchQuery}&limit=10`
+  //       );
+  //       if (response.ok) {
+  //         let data = await response.json();
+  //         console.log(data);
+  //         setData(data.data);
+  //       } else {
+  //         alert("something wrong with the data");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // };
+
   return (
     <BrowserRouter>
       <Jumbotron fluid>
@@ -60,10 +62,10 @@ function App() {
           path="/"
           element={
             <JobSearch
-              data={data}
-              setSearchQuery={setSearchQuery}
-              fetchSearchData={fetchSearchData}
-              searchQuery={searchQuery}
+            //data={data}
+            //setSearchQuery={setSearchQuery}
+            //fetchSearchData={fetchSearchData}
+            //searchQuery={searchQuery}
             />
           }
         />

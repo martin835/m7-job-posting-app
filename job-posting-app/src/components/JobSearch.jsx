@@ -1,11 +1,23 @@
 import { Container, Row, Col, Form, ListGroup } from "react-bootstrap";
 import JobPost from "./JobPost";
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchSearchedJobsAction } from "../redux/actions";
 
-function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
+const mapStateToProps = (state) => ({
+  data: state.fetchedJobs.searchedJobs,
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchSearchData: (e, searchQuery) => {
+    dispatch(fetchSearchedJobsAction(e, searchQuery));
+  },
+});
+
+// -----COMPONENT  BEGINNING---------
+function JobSearch(props) {
   const [categoryData, setCategoryData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -50,7 +62,7 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
                     placeholder="Search jobs"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyUp={(e) => fetchSearchData(e)}
+                    onKeyUp={(e) => props.fetchSearchData(e, searchQuery)}
                   />
                 </Col>
               </Row>
@@ -58,7 +70,7 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
             <Container>
               <Row>
                 <Col md={12}>
-                  {data.map((jobPost) => (
+                  {props.data.map((jobPost) => (
                     <JobPost jobPost={jobPost} key={jobPost._id} />
                   ))}
                 </Col>
@@ -71,4 +83,4 @@ function JobSearch({ data, setSearchQuery, fetchSearchData, searchQuery }) {
   );
 }
 
-export default JobSearch;
+export default connect(mapStateToProps, mapDispatchToProps)(JobSearch);
