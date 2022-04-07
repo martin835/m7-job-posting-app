@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
-  favorites: state.favorites,
+  favorites: state.favoriteJobs.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -18,13 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-function JobPost({
-  jobPost,
-
-  addToFavorites,
-  favorites,
-  removeFromFavorites,
-}) {
+function JobPost({ jobPost, addToFavorites, favorites, removeFromFavorites }) {
   return (
     <>
       <Card className="mt-3">
@@ -41,7 +35,7 @@ function JobPost({
             See all jobs from {jobPost.company_name}{" "}
           </Link>
 
-          {favorites.includes(jobPost) ? (
+          {favorites.map((f) => f._id).includes(jobPost._id) ? (
             <Button
               variant="link"
               className="ml-3"

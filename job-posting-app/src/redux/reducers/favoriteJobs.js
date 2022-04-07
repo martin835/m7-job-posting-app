@@ -2,7 +2,7 @@ import { initialState } from "../store";
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "../actions";
 import JobPost from "../../components/JobPost";
 
-const mainReducer = (state = initialState, action) => {
+const favoritesJobsReducer = (state = initialState.favoriteJobs, action) => {
   switch (action.type) {
     //actions go here
     case ADD_TO_FAVORITES:
@@ -21,4 +21,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default favoritesJobsReducer;

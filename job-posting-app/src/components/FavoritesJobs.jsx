@@ -3,7 +3,7 @@ import JobPost from "./JobPost";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
-  favorites: state.favorites,
+  favorites: state.favoriteJobs.favorites,
 });
 
 function FavoritesJobs(props) {

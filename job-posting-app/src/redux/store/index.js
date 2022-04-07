@@ -1,12 +1,19 @@
-import { createStore } from "redux";
-import mainReducer from "../reducers";
+import { createStore, combineReducers } from "redux";
+import allJobsReducer from "../reducers/allJobs";
+import favoritesJobsReducer from "../reducers/favoriteJobs";
 
 export const initialState = {
-  favorites: [],
+  favoriteJobs: { favorites: [] },
+  allJobs: { jobs: [] },
 };
 
+const bigReducer = combineReducers({
+  favoriteJobs: favoritesJobsReducer,
+  allJobs: allJobsReducer,
+});
+
 const configureStore = createStore(
-  mainReducer,
+  bigReducer,
   initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
