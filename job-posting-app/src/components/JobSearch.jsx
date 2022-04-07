@@ -1,12 +1,23 @@
-import { Container, Row, Col, Form, ListGroup } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  ListGroup,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
 import JobPost from "./JobPost";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSearchedJobsAction } from "../redux/actions";
+import { ImHeartBroken } from "react-icons/im";
 
 const mapStateToProps = (state) => ({
   data: state.fetchedJobs.searchedJobs,
+  isError: state.fetchedJobs.isError,
+  isLoading: state.fetchedJobs.isLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchSearchData: (e, searchQuery) => {
@@ -70,9 +81,20 @@ function JobSearch(props) {
             <Container>
               <Row>
                 <Col md={12}>
-                  {props.data.map((jobPost) => (
-                    <JobPost jobPost={jobPost} key={jobPost._id} />
-                  ))}
+                  {props.isError && (
+                    <Alert variant="danger">
+                      <Alert.Heading>
+                        Ups, something is broken <ImHeartBroken />
+                      </Alert.Heading>
+                    </Alert>
+                  )}
+                  {props.isLoading ? (
+                    <Spinner animation="border" variant="info" />
+                  ) : (
+                    props.data.map((jobPost) => (
+                      <JobPost jobPost={jobPost} key={jobPost._id} />
+                    ))
+                  )}
                 </Col>
               </Row>
             </Container>

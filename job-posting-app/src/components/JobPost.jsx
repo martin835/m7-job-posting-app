@@ -2,7 +2,10 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { RiHeartAddLine, RiHeartAddFill } from "react-icons/ri";
 import { connect } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../redux/actions";
+import {
+  addToFavoritesAction,
+  removeFromFavoritesAction,
+} from "../redux/actions";
 
 const mapStateToProps = (state) => ({
   favorites: state.favoriteJobs.favorites,
@@ -10,11 +13,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorites: (jobPost) => {
-    dispatch(addToFavorites(jobPost));
+    dispatch(addToFavoritesAction(jobPost));
   },
 
   removeFromFavorites: (id) => {
-    dispatch(removeFromFavorites(id));
+    dispatch(removeFromFavoritesAction(id));
   },
 });
 

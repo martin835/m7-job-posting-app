@@ -8,7 +8,7 @@ const composeFunctionThatAlwaysWorks =
 
 export const initialState = {
   favoriteJobs: { favorites: [] },
-  fetchedJobs: { searchedJobs: [] },
+  fetchedJobs: { searchedJobs: [], isError: false, isLoading: false },
 };
 
 const bigReducer = combineReducers({
