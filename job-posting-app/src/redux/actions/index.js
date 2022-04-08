@@ -14,8 +14,8 @@ export const removeFromFavoritesAction = (i) => ({
   payload: i,
 });
 
-export const fetchSearchedJobsAction = (e, searchQuery) => {
-  if (e.key !== "Enter") return;
+export const fetchSearchedJobsAction = (searchQuery) => {
+  //if (e.key !== "Enter") return;
   console.log(searchQuery);
   return async (dispatch, getState) => {
     try {

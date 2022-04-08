@@ -20,8 +20,9 @@ const mapStateToProps = (state) => ({
   isLoading: state.fetchedJobs.isLoading,
 });
 const mapDispatchToProps = (dispatch) => ({
-  fetchSearchData: (e, searchQuery) => {
-    dispatch(fetchSearchedJobsAction(e, searchQuery));
+  fetchSearchData: (searchQuery) => {
+    //if (e.key !== "Enter") return;
+    dispatch(fetchSearchedJobsAction(searchQuery));
   },
 });
 
@@ -49,6 +50,7 @@ function JobSearch(props) {
       console.log(error);
     }
   };
+
   return (
     <>
       <Container>
@@ -66,15 +68,21 @@ function JobSearch(props) {
             <Container className="mb-4">
               <Row>
                 <Col md={12}>
-                  <Form.Control
-                    size="lg"
-                    className="w-50"
-                    type="text"
-                    placeholder="Search jobs"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyUp={(e) => props.fetchSearchData(e, searchQuery)}
-                  />
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      props.fetchSearchData(searchQuery);
+                    }}
+                  >
+                    <Form.Control
+                      size="lg"
+                      className="w-50"
+                      type="text"
+                      placeholder="Search jobs"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </Form>
                 </Col>
               </Row>
             </Container>
