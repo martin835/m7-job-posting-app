@@ -1,27 +1,31 @@
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { RiHeartAddLine, RiHeartAddFill } from "react-icons/ri";
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavoritesAction,
   removeFromFavoritesAction,
 } from "../redux/actions";
 
-const mapStateToProps = (state) => ({
-  favorites: state.favoriteJobs.favorites,
-});
+// const mapStateToProps = (state) => ({
+//   favorites: state.favoriteJobs.favorites,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  addToFavorites: (jobPost) => {
-    dispatch(addToFavoritesAction(jobPost));
-  },
+// const mapDispatchToProps = (dispatch) => ({
+//   addToFavorites: (jobPost) => {
+//     dispatch(addToFavoritesAction(jobPost));
+//   },
 
-  removeFromFavorites: (id) => {
-    dispatch(removeFromFavoritesAction(id));
-  },
-});
+//   removeFromFavorites: (id) => {
+//     dispatch(removeFromFavoritesAction(id));
+//   },
+// });
 
-function JobPost({ jobPost, addToFavorites, favorites, removeFromFavorites }) {
+function JobPost({ jobPost }) {
+  const favorites = useSelector((state) => state.favoriteJobs.favorites);
+  const dispatch = useDispatch();
+
   return (
     <>
       <Card className="mt-3">
@@ -42,7 +46,7 @@ function JobPost({ jobPost, addToFavorites, favorites, removeFromFavorites }) {
             <Button
               variant="link"
               className="ml-3"
-              onClick={() => removeFromFavorites(jobPost._id)}
+              onClick={() => dispatch(removeFromFavoritesAction(jobPost._id))}
             >
               <RiHeartAddFill />
             </Button>
@@ -50,7 +54,7 @@ function JobPost({ jobPost, addToFavorites, favorites, removeFromFavorites }) {
             <Button
               variant="link"
               className="ml-3"
-              onClick={() => addToFavorites(jobPost)}
+              onClick={() => dispatch(addToFavoritesAction(jobPost))}
             >
               <RiHeartAddLine />
             </Button>
@@ -61,4 +65,5 @@ function JobPost({ jobPost, addToFavorites, favorites, removeFromFavorites }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobPost);
+//export default connect(mapStateToProps, mapDispatchToProps)(JobPost);
+export default JobPost;

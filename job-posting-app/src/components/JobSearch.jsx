@@ -13,23 +13,30 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSearchedJobsAction } from "../redux/actions";
 import { ImHeartBroken } from "react-icons/im";
+import { useSelector, useDispatch } from "react-redux";
 
-const mapStateToProps = (state) => ({
-  data: state.fetchedJobs.searchedJobs,
-  isError: state.fetchedJobs.isError,
-  isLoading: state.fetchedJobs.isLoading,
-});
-const mapDispatchToProps = (dispatch) => ({
-  fetchSearchData: (searchQuery) => {
-    //if (e.key !== "Enter") return;
-    dispatch(fetchSearchedJobsAction(searchQuery));
-  },
-});
+// const mapStateToProps = (state) => ({
+//   data: state.fetchedJobs.searchedJobs,
+//   isError: state.fetchedJobs.isError,
+//   isLoading: state.fetchedJobs.isLoading,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchSearchData: (searchQuery) => {
+//     //if (e.key !== "Enter") return;
+//     dispatch(fetchSearchedJobsAction(searchQuery));
+//   },
+// });
 
 // -----COMPONENT  BEGINNING---------
 function JobSearch(props) {
   const [categoryData, setCategoryData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  //START OF Hooks replacing connect function and mapStateToPros / mapDispatchToPros
+  const data = useSelector((state) => state.fetchedJobs.searchedJobs);
+  const isError = useSelector((state) => state.fetchedJobs.isError);
+  const isLoading = useSelector((state) => state.fetchedJobs.isLoading);
+  const dispatch = useDispatch();
+  //END OF Hooks replacing connect function and mapStateToPros / mapDispatchToPros
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -71,7 +78,7 @@ function JobSearch(props) {
                   <Form
                     onSubmit={(e) => {
                       e.preventDefault();
-                      props.fetchSearchData(searchQuery);
+                      dispatch(fetchSearchedJobsAction(searchQuery));
                     }}
                   >
                     <Form.Control
@@ -89,17 +96,17 @@ function JobSearch(props) {
             <Container>
               <Row>
                 <Col md={12}>
-                  {props.isError && (
+                  {isError && (
                     <Alert variant="danger">
                       <Alert.Heading>
                         Ups, something is broken <ImHeartBroken />
                       </Alert.Heading>
                     </Alert>
                   )}
-                  {props.isLoading ? (
+                  {isLoading ? (
                     <Spinner animation="border" variant="info" />
                   ) : (
-                    props.data.map((jobPost) => (
+                    data.map((jobPost) => (
                       <JobPost jobPost={jobPost} key={jobPost._id} />
                     ))
                   )}
@@ -113,4 +120,6 @@ function JobSearch(props) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobSearch);
+export default JobSearch;
+//Old connect function that is replaced by hooks:
+//export default connect(mapStateToProps, mapDispatchToProps)(JobSearch);
